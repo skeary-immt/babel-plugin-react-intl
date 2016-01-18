@@ -147,8 +147,8 @@ export default function () {
                 },
 
                 exit(path, state) {
-                    const {file, opts, reactIntl} = state;
-                    const {basename, filename}    = file.opts;
+                    const {file, opts, reactIntl}       = state;
+                    const {basename, sourceFileName}    = file.opts;
 
                     let descriptors = [...reactIntl.messages.values()];
                     file.metadata['react-intl'] = {messages: descriptors};
@@ -156,7 +156,7 @@ export default function () {
                     if (opts.messagesDir && descriptors.length > 0) {
                         let messagesFilename = p.join(
                             opts.messagesDir,
-                            p.dirname(p.relative(process.cwd(), filename)),
+                            p.dirname(sourceFileName),
                             basename + '.json'
                         );
 
